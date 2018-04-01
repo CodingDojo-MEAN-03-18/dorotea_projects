@@ -1,0 +1,32 @@
+<html>
+  <head></head>
+  <body>Hello World</body>
+  <script>
+  //In this assignment, complete the function magic_multiply and ensure it passes all the test inputs and matches their results.
+  //Modify magic_multiply until all the tests pass.
+  //Do not create a new magic_multiply for each test!-->
+  function magic_multiply(x,y){
+    if (x.constructor === Array){
+      for(i = 0; i < x.length; i++){
+        x[i] = x[i] * y;
+        return x;
+      }
+    }
+    else {
+      x = x * y
+      return x;
+    }
+
+  }
+
+  let test3 = magic_multiply([1, 2, 3], 2);
+  console.log(test3);
+
+  let test1 = magic_multiply(2,5);
+  console.log(test1);
+
+  let test2 = magic_multiply(0, 0);
+  console.log(test2);
+
+  </script>
+</html>
