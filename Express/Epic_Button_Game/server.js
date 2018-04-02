@@ -13,15 +13,29 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 const server = app.listen(port, () => console.log('listening on port' + port));
 const io = require('socket.io')(server);
-//var io = require('socket.io')(server);
+
+//make this global so it is shared among all the connections!
+let count = 0
 
 io.on('connection', socket => {
-
-  let count = 0
 
   console.log('Hello World');
 
   socket.on('buttonClicked', function(){
-    io.emit('numberUpdated', ++count);
+    numberUpdated(++count);
+    //io.emit('numberUpdated', ++count);
   });
+
+  socket.on('reset', function(){
+    numberUpdated(count = 0);
+    //count = 0;
+    //io.emit('numberUpdated', count)
+  });
+
+  //emit the number so user sees updated (not zero) count when open webpage
+  socket.emit('numberUpdated', count);
 });
+
+function numberUpdated(number){
+  io.emit('numberUpdated', number);
+}
