@@ -20,7 +20,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 // Set up body-parser to parse form data
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 
 // Setting our Static Folder Directory
 app.use(express.static(path.join(__dirname, './static')));
@@ -36,39 +36,95 @@ mongoose.connect('mongodb://localhost/Mongoose_Dashboard');
 
 //create Schemto model a QuoteSchema
 const LlamaSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minLength: 3},
-  color: String,
-  weight: Number,
-  isAlive:{
-    type: Boolean,
-    default: true,
-  }
+    name: {
+        type: String,
+        required: true,
+        minLength: 3
+    },
+    color: String,
+    weight: Number,
+    isAlive: {
+        type: Boolean,
+        default: true,
+    }
 });
 
 //set up schema in our Models as 'quote'
 mongoose.model('Llama', LlamaSchema);
 
 // Retrieve this Schema from our Models, named 'quote'
-const Llama =  mongoose.model('Llama');
+const Llama = mongoose.model('Llama');
 
 // Use native promises
 mongoose.Promise = global.Promise;
 
 //here are the routes!
+//index
+app.get('/', function (req, res) {
+    Llama.find({}, function (err, results) {
+        if (err) {
+            console.log(err);
+        }
+        res.render('index', {llama: results});
+    });
+});
 
-app.get('/', function(req, res) {
-    res.render('index');
-})
+//show
+//app.get('/:id', function (req, res) {
+//    Llama.find({_id: req.params.id}, function (err, response) {
+//        if (err) {
+//            console.log(err);
+//        }
+//        res.render('show', {llama: response[0]});
+//    });
+//});
 
-app.get('/llama/new', function(req, res) {
+//app.get('/:id/edit', function (req, res) {
+//    Llama.find({_id: req.params.id}, function (err, response) {
+//        if (err) {
+//            console.log(err);
+//        }
+//        res.render('edit', {llama: response[0]});
+//    })
+//});
+
+//New
+app.get('/new', function (req, res) {
     res.render('new');
 })
 
-//when doing the page to show all llamas, try to make in in a table see screen shot from lecture
+//create
+app.post('/', function (req, res) {
+    //Create a new Llama
+    Llama.create(req.body, function (err, response) {
+        if (err) {
+            console.log(err);
+        }
+        res.redirect('/')
+    });
+});
 
-app.listen(8000, function() {
+//Update
+//app.post('/:id/edit', function (req, res) {
+//    Llama.update({_id: req.params.id}, req.body, function (err, result) {
+//        if (err) {
+//            console.log(err);
+//        }
+//        res.redirect('/')
+//    })
+//}//);
+
+//app.post('/:id/delete', function (req, res) {
+//    Llama.remove({_id: req.params.id}, function (err, result) {
+//        if (err) {
+//            console.log(err);
+//        }
+//        res.redirect('/')
+//    })
+//});
+
+
+
+app.listen(8000, function () {
     console.log("listening on port 8000");
 })
