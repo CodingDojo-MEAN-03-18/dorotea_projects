@@ -10,7 +10,7 @@
   <body>
     <h1>My Awesome Llama Herd</h1>
     <h3>Edit a Llama!!</h3>
-    <form action="?<%=llama.id %>" method="post">
+    <form action="<%=llama.id %>" method="post">
       <label for="name">Name:</label>
       <input type="text" name=name value="<% = llama.name %>"> <br><br>
       <label for="color">Color:</label>
