@@ -31,53 +31,75 @@ app.set('view engine', 'ejs');
 //Connect Mongoose to MongoDB
 mongoose.connect('mongodb://localhost/Message_Board');
 
-//set up one to many relationship so can post comments
+//route to dispkay index and messsages
+app.get("/", function(req, res) {
+	Message.find({}, false, true).populate('_comments').exec(function(err, messages) {
+	      res.render('index.ejs', { messages: messages });
+	});
+});
+
+app.post("/message", function(req, res){
+	var newMessage = new Message({ name: req.body.name, message: req.body.message });
+	newMessage.save(function(err) {
+		if (err) {
+			console.log(err);
+			res.render('index.ejs', { errors: newMessage.errors });
+		} else {
+			console.log("success");
+			res.redirect('/');
+		}
+	})
+})
+app.post("/comment/:id", function(req, res) {
+	const messageId = req.params.id;
+	Message.findOne({ _id: messageId }, function(err, message) {
+		const newComment = new Comment({ name: req.body.name, text: req.body.comment });
+		newComment._message = message._id;
+		Message.update({ _id: message._id }, { $push: { _comments: newComment }}, function(err) {
+
+		});
+		newComment.save(function(err) {
+			if (err) {
+				console.log(err);
+				res.render('index.ejs', { errors: newComment.errors });
+			} else {
+				console.log("comment added");
+				res.redirect("/");
+			}
+		});
+	});
+});
+
 
 //define schema variable
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-//define post schema
-var PostSchema = new mongoose.Schema({
- text: { type: String, required: true },
- comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
-}, { timestamps: true });
-// The 'type' property of the object inside of the array is an attribute
-// that tells Mongoose what to look for.
+//define sechmas
+//set up one to many relationship by referencing Shema.Types.ObjectID, ref: comment
+const MessageSchema = new mongoose.Schema({
+	name: String,
+	message: String,
+	_comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
+});
 
-//define comment schema
-var CommentSchema = new mongoose.Schema({
- // since this is a reference to a different document, the _ is the naming convention!
- _post: {type: Schema.Types.ObjectId, ref: 'Post'},
- text: { type: String, required: true },
-}, {timestamps: true });
-// store our models in variables
-var Post = mongoose.model('Post');
-var Comment = mongoose.model('Comment');
+//set validation
+MessageSchema.path('name').required(true, 'Name cannot be blank');
+MessageSchema.path('message').required(true, 'Message cannot be blank');
+mongoose.model("Message", MessageSchema);
 
-app.get('/', function(req, res) {
-    res.render('index');
+const Message = mongoose.model("Message");
+const CommentSchema = new mongoose.Schema({
+	name: String,
+	text: String,
+	_message: {type: Schema.Types.ObjectId, ref: 'Message'}
+});
+
+CommentSchema.path('name').required(true, 'Name cannot be blank');
+CommentSchema.path('text').required(true, 'Comment cannot be blank');
+mongoose.model("Comment", CommentSchema);
+
+const Comment = mongoose.model("Comment");
+
+app.listen(8000, function () {
+    console.log("listening on port 8000");
 })
-
-// route for getting a particular post and comments
-//app.get('/posts/:id', function (req, res){
- //Post.findOne({_id: req.params.id})
- //.populate('comments')
- //.exec(function(err, post) {
-//      res.render('post', {post: post});
-//        });
-//})
-
-// route for creating one comment with the parent post id
-//app.post('/posts/:id', function (req, res){
-//Post.findOne({_id: req.params.id}, function(err, post){
-  //       var comment = new Comment(req.body);
-  //       comment._post = post._id;
-  //       post.comments.push(comment);
-  //       comment.save(function(err){
-//                 post.save(function(err){
-//                       if(err) { console.log('Error'); }
-//                       else { res.redirect('/'); }
-//                 });
-//         });
-//   });
- //});
