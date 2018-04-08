@@ -75,14 +75,7 @@ app.get('/:id', function (req, res) {
     });
 });
 
-//app.get('/:id/edit', function (req, res) {
-//    Llama.find({_id: req.params.id}, function (err, response) {
-//        if (err) {
-//            console.log(err);
-//        }
-//        res.render('edit', {llama: response[0]});
-//    })
-//});
+
 
 //New
 app.get('/new', function (req, res) {
@@ -101,14 +94,23 @@ app.post('/', function (req, res) {
 });
 
 //Update
-//app.post('/:id/edit', function (req, res) {
-//    Llama.update({_id: req.params.id}, req.body, function (err, result) {
-//        if (err) {
-//            console.log(err);
-//        }
-//        res.redirect('/')
-//    })
-//}//);
+app.get('/:id/edit', function (req, res) {
+    Llama.find({_id: req.params.id}, function (err, response) {
+        if (err) {
+            console.log(err);
+        }
+        res.render('edit', {llama: response[0]});
+    })
+});
+
+app.post('/:id/edit', function (req, res) {
+    Llama.update({_id: req.params.id}, req.body, function (err, result) {
+        if (err) {
+           console.log(err);
+        }
+       res.redirect('/')
+   })
+});
 
 //app.post('/:id/delete', function (req, res) {
 //    Llama.remove({_id: req.params.id}, function (err, result) {
