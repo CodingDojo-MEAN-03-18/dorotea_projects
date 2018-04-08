@@ -54,6 +54,26 @@ app.get('/', function(req, res){
 })
 
 //route to add new name
+app.get('/new/:name/', function(req, res){
+    console.log(req.params.name);
+    User.create({name: req.params.name})
+    res.redirect('/')
+  });
+
+//route to remove a person
+app.get('/remove/:name/', function(req, res){
+  console.log(req.params.name);
+  User.remove({name: req.params.name})
+  res.redirect('/')
+  });
+
+  //route to remove a person
+app.get('/:name/', function(req, res){
+  console.log(req.params.name);
+  var query = User.find({name: req.params.name})
+  res.json({message: "here is your result", query})
+  console.log(query);
+})
 
 // Setting our Server to Listen on Port: 8000
 app.listen(8000, function() {
