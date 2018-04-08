@@ -15,30 +15,22 @@
       <textarea name="message"></textarea> <br><br>
       <input type="submit" value="Post Message!">
     </form>
-    <% if (typeof(errors) !== 'undefined' ) { %>
-      <% for (const key in errors) { %>
-       <h3><%= errors[key].message %></h3>
-      <% } %>
-  <% } else { %>
-   <div>
-     <% for(const message of messages) { %>
-       <div>
-         <h3>Name: <%= message.name %></h3>
-         <h3>Message: <%= message.message %></h3>
-         <% for (const comment of message._comments) { %>
-           <h5><%="Name: " + comment.name %></h5>
-           <h5><%="Comment: " + comment.text %></h5>
-         <% } %>
 
-         <form action='/comment/<%= message._id %>' method="post">
-           <p class="margin">Name: </p><input class="comment_input" type="text" name="name">
-           <p class="margin">Comment: </p><textarea class="comment_text"name="comment"></textarea>
-           <input class="post2" type="submit" value="Post comment">
+    <%for(var x of m){%>
+        <h2>Name: <%=x.name%></h2>
+        <h2>Comment: <%=x.message%></h2>
+        <%for(var y of x._comments){%>
+            <h3>Name: <%= y.name%></h3>
+            <h3>Comment: <%= y.text%></h3>
+            <br>
+        <%}%>
+
+         <form action='/comment/<%= x._id %>' method="post">
+           <p>Name: </p><input type="text" name="name">
+           <p>Comment: </p><textarea class="comment_text"name="comment"></textarea>
+           <input type="submit" value="Post comment">
          </form>
-       </div>
-     <% } %>
-   </div>
- <% } %>
+       <% } %>
 
 </body>
 
