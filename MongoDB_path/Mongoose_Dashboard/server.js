@@ -43,10 +43,6 @@ const LlamaSchema = new mongoose.Schema({
     },
     color: String,
     weight: Number,
-    isAlive: {
-        type: Boolean,
-        default: true,
-    }
 });
 
 //set up schema in our Models as 'quote'
@@ -65,19 +61,19 @@ app.get('/', function (req, res) {
         if (err) {
             console.log(err);
         }
-        res.render('index', {llama: results});
+        res.render('index', {llamas: results});
     });
 });
 
 //show
-//app.get('/:id', function (req, res) {
-//    Llama.find({_id: req.params.id}, function (err, response) {
-//        if (err) {
-//            console.log(err);
-//        }
-//        res.render('show', {llama: response[0]});
-//    });
-//});
+app.get('/:id', function (req, res) {
+    Llama.find({ _id: req.params.id }, function (err, response) {
+        if (err) {
+            console.log(err);
+        }
+        res.render('show', {llama: response[0]});
+    });
+});
 
 //app.get('/:id/edit', function (req, res) {
 //    Llama.find({_id: req.params.id}, function (err, response) {
