@@ -10,13 +10,13 @@
   <body>
     <h1>My Awesome Llama Herd</h1>
     <h3>Edit a Llama!!</h3>
-    <form action="<%=llama.id %>" method="post">
+    <form action="/change/<%=meer._id%>" method="post">
       <label for="name">Name:</label>
-      <input type="text" name=name value="<% = llama.name %>"> <br><br>
+      <input type="text" name="name" value="<% = meer.name %>"> <br><br>
       <label for="color">Color:</label>
-      <input type="number" name=color value="<% = llama.color %>">> <br><br><br><br>
+      <input type="text" name="color" value="<% = meer.color %>"> <br><br>
       <label for="weight">Weight:</label>
-      <input type="number" name=weight value="<% = llama.weight %>">> <br><br>
+      <input type="number" name="weight" value="<% = meer.weight %>"> <br><br>
       <input type="submit" value="Edit Llama">
     </form>
     <br><br>

@@ -19,6 +19,8 @@ const path = require('path');
 //Require mongoose
 const mongoose = require('mongoose');
 
+const ejsLint = require('ejs-lint');
+
 // Set up body-parser to parse form data
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -36,11 +38,7 @@ mongoose.connect('mongodb://localhost/Mongoose_Dashboard');
 
 //create Schemto model a QuoteSchema
 const LlamaSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        minLength: 3
-    },
+    name: String,
     color: String,
     weight: Number,
 });
@@ -57,60 +55,62 @@ mongoose.Promise = global.Promise;
 //here are the routes!
 //index
 app.get('/', function (req, res) {
-    Llama.find({}, function (err, results) {
-        if (err) {
-            console.log(err);
-        }
-        res.render('index', {llamas: results});
+    arr = Llama.find({}, function (err, llamas) {
+        res.render('index', {arr: llamas});
     });
 });
-
-//show
-app.get('/:id', function (req, res) {
-    Llama.find({ _id: req.params.id }, function (err, response) {
-        if (err) {
-            console.log(err);
-        }
-        res.render('show', {llama: response[0]});
-    });
-});
-
-
 
 //New
 app.get('/new', function (req, res) {
     res.render('new');
 })
 
+
 //create
-app.post('/', function (req, res) {
-    //Create a new Llama
-    Llama.create(req.body, function (err, response) {
-        if (err) {
-            console.log(err);
-        }
-        res.redirect('/')
-    });
+app.post('/add', function (req, res) {
+  console.log("POST DATA", req.body);
+  var llama = new Llama({name: req.body.name, color: req.body.color, weight: req.body.weight});
+  llama.save(function(err){
+    if (err){
+      console.log('Something went wrong');
+      console.log(llama.errors);
+      res.redirect("/")
+    }
+    else{
+      console.log("succesffully added a llama");
+      res.redirect('/');
+    }
+  })
 });
+
+
+app.get('/edit/:id', function(req, res) {
+    meer = Llama.findOne({_id: req.params.id}, function(err, llama) {
+        console.log(llama);
+        res.render('edit', {meer:llama});
+    })
+})
+
+
 
 //Update
-app.get('/:id/edit', function (req, res) {
-    Llama.find({_id: req.params.id}, function (err, response) {
-        if (err) {
-            console.log(err);
-        }
-        res.render('edit', {llama: response[0]});
-    })
-});
+//app.get('/:id/edit', function (req, res) {
+//    Llama.find({_id: req.params.id}, function (err, response) {
+//        if (err) {
+//            console.log(err);
+//        }
+//        res.render('edit', {llama: response[0]});
+//    })
+//});
 
-app.post('/:id/edit', function (req, res) {
-    Llama.update({_id: req.params.id}, req.body, function (err, result) {
-        if (err) {
-           console.log(err);
-        }
-       res.redirect('/')
-   })
-});
+//app.post('/:id/edit', function (req, res) {
+//    Llama.update({_id: req.params.id}, req.body, function (err, result) {
+//        if (err) {
+//           console.log(err);
+//        }
+//       res.redirect('/')
+//   })
+//});
 
 //app.post('/:id/delete', function (req, res) {
 //    Llama.remove({_id: req.params.id}, function (err, result) {

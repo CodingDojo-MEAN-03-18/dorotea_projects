@@ -14,19 +14,21 @@
     <img src="/images/packllamas.jpg" class="main_image">
     <img src="/images/packllamas2.jpg" class="main_image">
 
-    <%for(const llama of llamas){%>
-      <p>Name: <%= llama.name %></p>
-      <p>Color: <%= llama.color %></p>
-      <p>Weight: <%= llama.weight %></p>
-      
+    <%for(var llama in arr){%>
+      <p>ID: <%= arr[llama] %></p>
+      <p>Name: <%= arr[llama].name %></p>
+      <p>Color: <%= arr[llama].color %></p>
+      <p>Weight: <%= arr[llama].weight %></p>
+      <a href="meerkats/<%= arr[llama]._id%>">check this out</a>
+
     <%} %>
     <h4>Use the buttons below to do awesome things with llamas!</h4>
 
-    <a href="/:id"><button type="button" class="main_button">See Recent Llama</button></a>
+    <!--<a href="/:id"><button type="button" class="main_button">See Recent Llama</button></a>-->
 
     <a href="/new"><button type="button" class="main_button">Add New Llama</button></a>
 
-    <a href="/:id/edit"><button type="button" class="main_button">Edit Llama</button></a>
+    <a href="/edit/:id"><button type="button" class="main_button">Edit Llama</button></a>
 
 
     <!--<form action=>
