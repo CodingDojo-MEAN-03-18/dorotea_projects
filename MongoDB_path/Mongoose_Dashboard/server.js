@@ -5,7 +5,7 @@
 //npm install mongoose
 
 // Require the Express Module
-const express = require('express')
+const express = require('express');
 
 // Create an Express App
 const app = express();
@@ -63,7 +63,7 @@ app.get('/', function (req, res) {
 //New
 app.get('/new', function (req, res) {
     res.render('new');
-})
+});
 
 
 //create
@@ -83,44 +83,47 @@ app.post('/add', function (req, res) {
   })
 });
 
+app.get('/llamas/edit/:id', function(req, res) {
+    meer = Llama.find({_id: req.params.id}, function(err, llama) {
+        console.log(llama);
+        res.render('llama', {meer:llama});
+    })
+});
 
-app.get('/edit/:id', function(req, res) {
-    meer = Llama.findOne({_id: req.params.id}, function(err, llama) {
+//Update
+app.post('/change/:id', function(req, res) {
+    console.log("POST DATA", req.body);
+    Llama.update({_id: req.params.id},
+        {name: req.body.name, color: req.body.color, weight: req.body.weight},
+        function(err){
+            if(err) {
+                console.log('something went wrong');
+                console.log(llama.errors);
+                res.redirect(`/llamas/edit/${req.params.id}`)
+            }
+            else {
+                console.log('successfully changed a Llama!');
+                res.redirect(`/llamas/${req.params.id}`);
+            }
+
+        })
+})
+
+//Delete
+app.post('/delete/:id', function(req,res){
+    Llama.remove({_id: req.params.id}, function(err){
+        console.log("RECORD DELETED");
+        res.redirect('/');
+    })
+});
+
+//Get llama to edit
+app.get('/llamas/:id', function(req, res) {
+    meer =Llama.findOne({_id: req.params.id}, function(err, llama) {
         console.log(llama);
         res.render('edit', {meer:llama});
     })
-})
-
-
-
-//Update
-//app.get('/:id/edit', function (req, res) {
-//    Llama.find({_id: req.params.id}, function (err, response) {
-//        if (err) {
-//            console.log(err);
-//        }
-//        res.render('edit', {llama: response[0]});
-//    })
-//});
-
-//app.post('/:id/edit', function (req, res) {
-//    Llama.update({_id: req.params.id}, req.body, function (err, result) {
-//        if (err) {
-//           console.log(err);
-//        }
-//       res.redirect('/')
-//   })
-//});
-
-//app.post('/:id/delete', function (req, res) {
-//    Llama.remove({_id: req.params.id}, function (err, result) {
-//        if (err) {
-//            console.log(err);
-//        }
-//        res.redirect('/')
-//    })
-//});
-
+});
 
 
 app.listen(8000, function () {

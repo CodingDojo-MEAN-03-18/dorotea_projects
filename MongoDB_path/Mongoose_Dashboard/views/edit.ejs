@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA_Compatible" content="ie-edge">
     <link rel="stylesheet" href="/css/style.css">
     <title>Coding Dojo Mongoose Dashboard Assignment</title>
-  </head>
-  <body>
-    <h1>My Awesome Llama Herd</h1>
-    <h3>Edit a Llama!!</h3>
-    <form action="/change/<%=meer._id%>" method="post">
-      <label for="name">Name:</label>
-      <input type="text" name="name" value="<% = meer.name %>"> <br><br>
-      <label for="color">Color:</label>
-      <input type="text" name="color" value="<% = meer.color %>"> <br><br>
-      <label for="weight">Weight:</label>
-      <input type="number" name="weight" value="<% = meer.weight %>"> <br><br>
-      <input type="submit" value="Edit Llama">
-    </form>
-    <br><br>
-  </body>
+</head>
+<body>
+<h1>My Awesome Llama Herd</h1>
+<h3>Edit a Llama!!</h3>
+<form action="/change/<%=meer._id%>" method="post">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="<%=meer.name%>"> <br><br>
+    <label for="color">Color:</label>
+    <input type="text" name="color" value="<%=meer.color%>"> <br><br>
+    <label for="weight">Weight:</label>
+    <input type="number" name="weight" value="<%=meer.weight%>"> <br><br>
+    <input type="submit" value="Change Llama">
+</form>
+<br><br>
+<form action="/delete/<%=meer._id%>" method="post">
+    <input type="submit" value="Butcher This Llama">
+</form>
+<br><br>
+<a href="/"><input type="submit" value="Home"></a>
+
+</body>
 </html>

@@ -19,20 +19,12 @@
       <p>Name: <%= arr[llama].name %></p>
       <p>Color: <%= arr[llama].color %></p>
       <p>Weight: <%= arr[llama].weight %></p>
-      <a href="meerkats/<%= arr[llama]._id%>">check this out</a>
+      <a href="/llamas/<%= arr[llama]._id%>">Edit/Butcher This Llama</a>
 
     <%} %>
-    <h4>Use the buttons below to do awesome things with llamas!</h4>
+    <h4>Add a Llama to the herd!</h4>
 
-    <!--<a href="/:id"><button type="button" class="main_button">See Recent Llama</button></a>-->
 
     <a href="/new"><button type="button" class="main_button">Add New Llama</button></a>
-
-    <a href="/edit/:id"><button type="button" class="main_button">Edit Llama</button></a>
-
-
-    <!--<form action=>
-      <a href="/"><button type="button" class="main_button" value="Delete">Butcher Llama</button></a>
-    </form>-->
 
   </body>
