@@ -48,16 +48,19 @@ mongoose.connect('mongodb://localhost/Login_Registration');
 const UserSchema = new mongoose.Schema({
     email: {
       type: String,
+      minlength: 5,
       required: true,
       trim: true,
     },
     first_name: {
       type: String,
+      minlength: 2,
       required: true,
       trim: true,
     },
     last_name: {
       type: String,
+      minlength: 2,
       required: true,
       trim: true,
     },
