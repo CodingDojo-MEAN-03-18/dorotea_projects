@@ -24,7 +24,10 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 //Require session
-var session = require('express-session')
+const session = require('express-session')
+
+// Use the session middleware
+app.use(session({ secret: 'CodingDojo', cookie: { maxAge: 60000 }}))
 
 // Set up body-parser to parse form data
 app.use(bodyParser.urlencoded({extended: false}));
@@ -86,6 +89,34 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
+app.get('/hello', function(req, res, next) {
+  if (req.session.views) {
+   req.session.views++
+   //res.setHeader('Content-Type', 'text/html')
+  // res.write('<p>views: ' + req.session.views + '</p>')
+  // res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
+   res.render('hello')
+ } else {
+   req.session.views = 1
+   console.log("session started")
+   res.render('hello')
+ }
+});
+
+app.get('/logout', function(req, res,next){
+  req.session.destroy(function(err) {
+  // cannot access session here
+  if (err){
+    console.log('Could not end session');
+    res.redirect("/")
+  }
+  else{
+    console.log("succesffully ended session");
+    res.redirect('/');
+  }
+})
+})
+
 //create database entry if succesful and route to welcome page
 app.post('/register', function (req, res){
   console.log("POST DATA", req.body);
@@ -105,7 +136,6 @@ app.post('/register', function (req, res){
 
 
 //start a session if login succesful
-
 
 app.listen(8000, function () {
     console.log("listening on port 8000");
