@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  //title = 'app';
-  email = ["hello@gmail.com", "FRED@gmail.com"]
+  title = 'Dojo Mail';
+  emails = [
+    {email:"hello@gmail.com", importance: true, subject: "Hello World", content: "This is my first email"},
+    {email:"secondhello@gmail.com", importance: false, subject: "HL3!", content: "Just Kidding"},
+  ]
 }

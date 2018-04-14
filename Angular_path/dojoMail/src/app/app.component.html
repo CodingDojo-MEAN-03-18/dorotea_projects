@@ -1,5 +1,26 @@
-<h5 *ngFor = 'let email of emails'>
-  {{email | lowercase }}
-</h5>
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+      <h2>Dojo Mail</h2>
+      <table>
+        <tr>
+          <th>Email</th>
+          <th>Importance</th>
+          <th>Subject</th>
+          <th>Content</th>
+        </tr>
+        <tr *ngFor = 'let e of emails'>
+          <td>{{e.email | lowercase }}</td>
+          <td *ngIf='e.importance'>High</td>
+          <td *ngIf='!e.importance'>Low</td>
+          <td>{{e.subject}}</td>
+          <td>{{e.content}}</td>
+        </tr>
+      </table>
+   
+  </body>
+</html>
 
