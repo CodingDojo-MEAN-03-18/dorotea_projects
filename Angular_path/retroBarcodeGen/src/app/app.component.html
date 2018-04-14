@@ -5,6 +5,12 @@
   </head>
   <body>
     <h1>Retro Barcode Generator</h1>
-    <span [ngClass] = "background-color: {ran};">I should be a color</span>
+    <div [ngStyle]="{
+      'background-color':color,
+      'width': '75px',
+      'height': '75px',
+      'display': 'inline-block',
+      'border': '1px solid black'
+    }" *ngFor="let color of colors"></div>
   </body>
 </html>
