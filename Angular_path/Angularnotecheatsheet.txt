@@ -1,0 +1,5 @@
+angular notes
+
+to compile typescript => tsc filename.tx
+
+const array: Array<stringNumBool> = [99, 'cat']
