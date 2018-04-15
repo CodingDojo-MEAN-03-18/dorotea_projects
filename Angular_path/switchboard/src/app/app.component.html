@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <style>
+      button{height: 40px; width: 40px;}
+    </style>
+  </head>
+
+  <body>
+    <h2>Switchboard</h2>
+    <button *ngFor="let stat of status, let idx = index" (click)='swap(idx)'>{{name[idx]}}</button>
+  </body>
+</html>
+
