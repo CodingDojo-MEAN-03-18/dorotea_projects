@@ -188,10 +188,10 @@
               <input type="radio" name="lucky" value="No" [(ngModel)]="user.lucky" required #no='ngModel'> No
           </div>
           <br>
-          <button [disabled] = 'userForm.invalid' value="Register" >Submit</button>
+          <button [disabled] = 'userForm.invalid' name = 'register' value="true" >Submit</button>
 
-          <div *ngIf='form' id='success'>
-              <p>Thank you for registering {{ user.first_Name }} {{ user.last_Name }}!</p>
+          <div *ngIf='onSubmit' id='success'>
+              <p>Thank you for registering {{ user.first_name }} {{ user.last_name }}!</p>
               <p>We just sent a confirmation email to {{ user.email }}, and we will send</p>
               <p>all mail to {{ user.street_address }} {{ user.unit_apt }}, {{ user.city }}, {{ user.state }}.</p>
               <p>Have a wonderful day!</p>
