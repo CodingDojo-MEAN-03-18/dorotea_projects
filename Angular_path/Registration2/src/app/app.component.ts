@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from './user';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -7,17 +9,21 @@ import { User } from './user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular Registration Assignment';
+  title = 'Coding Dojo Registration Form Assignment';
 
   form_submitted: boolean = false;
-  form_complete: boolean = false;
+  //form_complete: boolean = false;
 
-  user = new User();
-  users = [];
+  user: User = new User();
+  users: Array<User> = [];
 
-  onSubmit(){
+  onSubmit(form: NgForm, event: Event)  {
+    event.preventDefault();
     this.form_submitted = true;
+    console.log (form.value);
     this.users.push(this.user);
     this.user = new User();
+    //form.reset();
   }
+
 }
