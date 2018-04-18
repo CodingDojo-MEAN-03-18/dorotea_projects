@@ -7,16 +7,9 @@
   <body>
       <h1 style='text-align:center'>Registration Form</h1>
 
-  <!--<div *ngIf='form_submitted'>
-      <p style="display: inline-block">Thank you for registering with us {{ users[users.length - 1].first_name }}.</p>
-      <p "disoplay: inline-block"> We just sent you a confirmation email at <a href="">{{ users[users.length - 1].email }}</a>, and we will
-            send all mail to {{ users[users.length - 1].street_address }} {{ users[users.length - 1].unit_apt }}, {{ users[users.length - 1].city }}, {{ users[users.length - 1].state }}.</p>
-      <p style="display: inline-block">Have a wonderful day!</p>
-  </div>-->
-
       <fieldset>
         <legend>User Form</legend>
-        <form id = "registration-from" (submit)="onSubmit($event)" #userForm = 'ngForm'>
+        <form (submit)="onSubmit($event)" #userForm = 'ngForm'>
 
           <div>
             <label for="first_name">*First Name:  </label>
@@ -190,10 +183,10 @@
           <br>
           <button [disabled] = 'userForm.invalid' name = 'register' value="true" >Submit</button>
 
-          <div *ngIf='onSubmit' id='success'>
-              <p>Thank you for registering {{ user.first_name }} {{ user.last_name }}!</p>
-              <p>We just sent a confirmation email to {{ user.email }}, and we will send</p>
-              <p>all mail to {{ user.street_address }} {{ user.unit_apt }}, {{ user.city }}, {{ user.state }}.</p>
+          <div *ngIf="visible">
+              <p>Thank you for registering {{ users[users.length-1].first_name }} {{ users[users.length-1].last_name }}!</p>
+              <p>We just sent a confirmation email to {{ users[users.length-1].email }}, and we will send</p>
+              <p>all mail to {{ users[users.length-1].street_address }} {{ users[users.length-1].unit_apt }}, {{ users[users.length-1].city }}, {{ users[users.length-1].state }}.</p>
               <p>Have a wonderful day!</p>
           </div>
         </form>
