@@ -7,10 +7,17 @@ import { NumbersService } from '../numbers.service';
   styleUrls: ['./beta.component.css']
 })
 export class BetaComponent implements OnInit {
-
-  constructor(private_numbersService: NumbersService) { }
+  randombeta: number[] = [];
+  constructor(private _numbersService: NumbersService) { }
 
   ngOnInit() {
+    this.randombeta = this._numbersService.retrieveBeta();
+  }
+
+  genSequence() {
+    console.log('beta worked?');
+    const number = this._numbersService.generateNumber();
+    this._numbersService.randombeta.push(number);
   }
 
 }

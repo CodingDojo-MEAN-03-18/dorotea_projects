@@ -8,9 +8,14 @@ import { NumbersService } from '../numbers.service';
 })
 export class MuskComponent implements OnInit {
 
-  constructor(private_numbersService: NumbersService) { }
+  constructor(private _numbersService: NumbersService) { }
+  diff: number;
 
   ngOnInit() {
   }
 
+  difference() {
+    console.log('musk worked?');
+    this._numbersService.generateDifference();
+  }
 }
