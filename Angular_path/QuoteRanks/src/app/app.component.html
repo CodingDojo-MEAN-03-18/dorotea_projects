@@ -1,0 +1,10 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <app-quoteform (myEvent)="invoke($event)"></app-quoteform>
+    <app-quotelist [myQuotes]="quotes" (updateEvent)="update($event)"></app-quotelist>
+  </body>
+</html>
+

@@ -1,0 +1,30 @@
+<h1>Add a Quote</h1>
+<form (submit)="callParent()">
+
+  <textarea
+  name='quote'
+  required
+  [(ngModel)]="quote.quote"
+  #quote = 'ngModel'
+  required minLength="4"
+  rows="5" cols='40'>
+</textarea>
+
+<label *ngIf='quote.errors && quote.dirty' class="error">Quote is required and must be at least 4 characters</label>
+
+<br><br>
+
+<label for="author">*Author:  </label>
+<input type="text"
+name ="author"
+[(ngModel)]="quote.author"
+required
+#author='ngModel'
+required minlength="1">
+
+<label *ngIf='author.errors && author.dirty' class="error">Author is required and must be at least 1 characters</label>
+
+<input type="submit" [disabled] = 'quoteForm.invalid' value="submit">
+
+</form>
+<p *ngFor="let q of quotes">{{q}}</p>
