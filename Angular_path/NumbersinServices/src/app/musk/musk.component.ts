@@ -16,6 +16,7 @@ export class MuskComponent implements OnInit {
 
   difference() {
     console.log('musk worked?');
-    this._numbersService.generateDifference();
+    this.diff = this._numbersService.generateDifference();
+    return this.diff;
   }
 }

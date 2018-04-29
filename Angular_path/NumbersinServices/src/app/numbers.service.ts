@@ -37,7 +37,9 @@ export class NumbersService {
     const sumAlpha: number = this.arrayTotal (this.randomalpha);
     const sumBeta: number = this.arrayTotal (this.randombeta);
     this.difference = sumAlpha - sumBeta;
+    console.log(this.difference);
     return this.difference;
+
   }
 
   arrayTotal(arr: number[]): number {
