@@ -9,10 +9,10 @@ export class TaskService {
   constructor(private _http: HttpClient) { }
 
   getTask( task: string) {
-    this._http.get('https://api.github.com/search/users?q=' + task).subscribe(
+    this._http.get('https://api.github.com/users/' + task).subscribe(
       (task: any[]) => { this.task.next(task); }
     );
-    console.log("hit gettask");
+    console.log('hit gettask');
   }
 
 }

@@ -19,7 +19,7 @@ export class AlphaComponent implements OnInit {
   onSubmit(event: Event, form: NgForm) {
     event.preventDefault();
     console.log(this.task);
-    this._taskService.getTask(this.task);;
+    this._taskService.getTask(this.task);
     this._taskService.task.subscribe((this.task)) => {this.task = task; }
     form.reset();
   }
