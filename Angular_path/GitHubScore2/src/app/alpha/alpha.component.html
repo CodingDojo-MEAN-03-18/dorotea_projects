@@ -1,0 +1,11 @@
+<h5>Github Score</h5>
+<form (submit)="userForm.valid && onSubmit($event, userForm)" #userForm = 'ngForm'>
+ Github User Name: <input type="text"
+ required
+ [(ngModel)]="task.taskname"
+ name="taskname"
+ #taskname = 'ngModel'
+ required minlength="2"/>
+<br><br>
+<button [disabled] ='!userForm.valid'>Calculate my Github Score</button>
+</form>
