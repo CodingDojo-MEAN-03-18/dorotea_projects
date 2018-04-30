@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-alpha',
   templateUrl: './alpha.component.html',
   styleUrls: ['./alpha.component.css']
 })
 export class AlphaComponent implements OnInit {
-  task = {
-    taskname: '',
-  };
+  task: any[] = [];
 
   constructor(private _taskService: TaskService) { }
 
@@ -19,8 +18,9 @@ export class AlphaComponent implements OnInit {
 
   onSubmit(event: Event, form: NgForm) {
     event.preventDefault();
-    console.log(this.task.taskname);
-    this._taskService.getTask(this.task.taskname);
+    console.log(this.task);
+    this._taskService.getTask(this.task);;
+    this._taskService.task.subscribe((this.task)) => {this.task = task; }
     form.reset();
   }
 }
