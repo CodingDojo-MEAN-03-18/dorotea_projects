@@ -1,3 +1,7 @@
-<p>
-  chicago works!
-</p>
+<h1> Chicago </h1>
+<img height="300" width="300" src="https://images.pexels.com/photos/161963/chicago-illinois-skyline-skyscrapers-161963.jpeg">
+<p>Humidity: {{ this.city.main.humidity}}</p>
+<p>Temperature (Average): {{this.city.main.temp}}</p>
+<p>Temperature (High): {{ this.city.main.temp_max}}</p>
+<p>Temperature (Low): {{ this.city.main.temp_min}}</p>
+<p>Description: {{ this.city.weather[0].description}}</p>

@@ -1,5 +1,7 @@
 <h1> Burbank </h1>
-<img src="https://www.pexels.com/photo/man-in-blue-top-carrying-a-longboard-988914/">
-<p>Temperature: {{ city.main}}</p>
-
-
+<img height="300" width="300" src="https://images.pexels.com/photos/988914/pexels-photo-988914.jpeg">
+<p>Humidity: {{ this.city.main.humidity}}</p>
+<p>Temperature (Average): {{this.city.main.temp}}</p>
+<p>Temperature (High): {{ this.city.main.temp_max}}</p>
+<p>Temperature (Low): {{ this.city.main.temp_min}}</p>
+<p>Description: {{ this.city.weather[0].description}}</p>

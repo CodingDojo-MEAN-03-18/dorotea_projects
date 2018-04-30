@@ -8,9 +8,9 @@ export class WeatherService {
 
   constructor(private _http: HttpClient) { }
 
-  getWeather( weather: string) {
+  getWeather( city: string) {
     console.log('get weather');
-    this._http.get('http://api.openweathermap.org/data/2.5/weather?q=burbank&APPID=81c567573cdd06b5b249bc97c2373f1f').subscribe(
+    this._http.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&APPID=81c567573cdd06b5b249bc97c2373f1f').subscribe(
       (city: any[]) => {this.city.next(city); }
     );
   }
