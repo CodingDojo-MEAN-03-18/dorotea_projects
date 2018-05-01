@@ -10,7 +10,8 @@ export class TaskService {
 
   getTask( task: string) {
     this._http.get('https://api.github.com/users/' + task).subscribe(
-      (task: any[]) => { this.task.next(task); }
+      (task: any[]) => { this.task.next(task);
+        console.log(task)};
     );
     console.log('hit gettask');
   }

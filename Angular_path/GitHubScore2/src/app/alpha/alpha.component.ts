@@ -10,6 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AlphaComponent implements OnInit {
   task: any [''] = '';
+  userData: any;
 
   constructor(private _taskService: TaskService) { }
 
@@ -20,7 +21,7 @@ export class AlphaComponent implements OnInit {
     event.preventDefault();
     console.log(this.task);
     this._taskService.getTask(this.task);
-    this._taskService.task.subscribe((task) => {this.task = task; });
+    this._taskService.task.subscribe((task) => {this.userData = task; });
     form.reset();
   }
 }
