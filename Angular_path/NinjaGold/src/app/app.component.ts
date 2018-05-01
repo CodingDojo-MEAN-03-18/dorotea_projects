@@ -12,6 +12,10 @@ export class AppComponent implements OnInit {
   constructor(private _dataService: DataService ) { }
   total_gold = 0;
 
+  getGoldFromChild(total_gold) {
+    this.total_gold = total_gold;
+  }
+
 
   ngOnInit() {
     this.total_gold = this._dataService.retrieveGold();
