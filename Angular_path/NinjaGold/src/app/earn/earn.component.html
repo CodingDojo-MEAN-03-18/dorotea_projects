@@ -1,6 +1,19 @@
-<p>
-  Earn Gold!
-</p>
-<button (click) ="genFarm()">Farm</button> | <button (click) ="genCave()">Cave</button> | <button (click) ="genCasino()">Casino</button> | <button (click) ="genHouse()">House</button>
-<h2 *ngIf='gold'>{{ gold }}</h2>
+
+<h3>Farm</h3>
+<p>Earns 2-5 Gold</p>
+<button (click) ="genFarm()">Farm</button>
+
+<h3>Cave</h3>
+<p>Earns 5-10 Gold</p>
+<button (click) ="genCave()">Cave</button>
+
+<h3>Casino</h3>
+<p>Earn or lose up to 100 Gold</p>
+<button (click) ="genCasino()">Casino</button>
+
+<h3>House</h3>
+<p>Earn 5-7 Gold</p>
+<button (click) ="genHouse()">House</button>
+
+<h2 *ngIf='gold'>Total Gold: {{ gold }}</h2>
 
