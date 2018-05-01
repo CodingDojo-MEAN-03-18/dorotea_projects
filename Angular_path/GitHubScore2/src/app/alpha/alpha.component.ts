@@ -9,7 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./alpha.component.css']
 })
 export class AlphaComponent implements OnInit {
-  task: any[] = [];
+  task: any [''] = '';
 
   constructor(private _taskService: TaskService) { }
 
@@ -20,7 +20,7 @@ export class AlphaComponent implements OnInit {
     event.preventDefault();
     console.log(this.task);
     this._taskService.getTask(this.task);
-    this._taskService.task.subscribe((this.task)) => {this.task = task; }
+    this._taskService.task.subscribe((task) => {this.task = task; });
     form.reset();
   }
 }
