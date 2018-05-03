@@ -1,0 +1,23 @@
+<p>Submit a Note</p>
+<form (submit)='noteForm.valid && onSubmit($event, noteForm)' #noteForm = 'ngForm'>
+  <label for ="note">Note: </label>
+  <input type=text
+  name = "note"
+  [(ngModel = 'note.note')]
+  required minlength = '3'/>
+  <button>Add Note</button>
+</form>
+<!--<form (submit)='noteform.valid && onSubmit($event, noteForm)' #noteForm = 'ngForm'>
+  <label for="note">Note: </label>
+  <input type='text'
+  name = 'note'
+  [(ngModel) = 'note.note']
+  #note = 'ngModel'
+  required minlength = '3'>
+
+  <button [disabled] = '!noteForm.valid'>Add Note</button>
+</form>-->
+
+
+
+
