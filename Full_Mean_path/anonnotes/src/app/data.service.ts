@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'Rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Note } from './note';
 
 @Injectable()
 export class DataService {
   data: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  notes: any[] = [];
 
+  constructor() { }
 
-  constructor(private _http: HttpClient) { }
-
-  getData (newData: any): void {
-    console.log('using getData');
-    const tempData = this.data.getValue();
-    tempData.push(newData);
-    this.data.next(tempData);
-  }
-
+    getData(data) {
+      this.notes.push(data);
+      console.log(this.data);
+      console.log('ran getdata');
+    }
 
 }

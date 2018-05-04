@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { NgForm } from '@angular/forms';
+import { Note } from '../note';
 
 @Component({
   selector: 'app-submit-note',
@@ -8,7 +9,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./submit-note.component.css']
 })
 export class SubmitNoteComponent implements OnInit {
-  data: any[] = [];
+  data: any[''] = '';
+  notes: any[''] = '';
   userData: any;
 
   constructor(private _dataService: DataService) { }
@@ -16,10 +18,13 @@ export class SubmitNoteComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(event: Event, form: NgForm) {
+    onSubmit(event: Event, form: NgForm) {
     event.preventDefault();
-    console.log(this.data);
+    console.log('ran onSubmit');
     this._dataService.getData(this.data);
+    console.log(this.data);
     this._dataService.data.subscribe((data) => {this.userData = data; });
+    form.reset();
   }
-}
+    }
+
